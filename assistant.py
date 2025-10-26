@@ -1,7 +1,7 @@
 from openai import OpenAI
 import speech_recognition as sr, pyttsx3, pyautogui, os, webbrowser, psutil, subprocess
 
-openai = OpenAI(api_key="ollama", base_url="http://localhost:11434")
+openai = OpenAI(api_key="ollama", base_url="http://localhost:11434/v1")
 engine = pyttsx3.init()
 recognizer = sr.Recognizer()
 
@@ -78,7 +78,7 @@ def execute_command(text):
     {
         "role": "system",
         "content": (
-            "You are Jarvis, an intelligent AI assistant that runs on a user’s personal computer. "
+            "You are Jarvis, an intelligent AI assistant that runs on a user's personal computer. "
             "You can interpret both text and voice commands to perform desktop automation tasks. "
             "Your role is to understand user intent and convert it into clear, executable actions."
             "\n\n"
@@ -94,7 +94,7 @@ def execute_command(text):
             "4. Always assume you are interacting with a real Windows or Linux desktop environment.\n"
             "5. Your output should describe what to do, not raw Python or PowerShell code.\n"
             "6. For web tasks, prefer 'open YouTube', 'search Google', etc.\n"
-            "7. For voice responses, speak naturally (e.g., 'Sure, I’m on it!' or 'Done!')."
+            "7. For voice responses, speak naturally (e.g., 'Sure, I'm on it!' or 'Done!')."
         )
     },
     {
@@ -112,7 +112,7 @@ def execute_command(text):
 speak("Hello! I'm ready.")
 while True:
     command = listen()
-    if "stop" in command or "exit" in command:
+    if "stop" in command or "exit" in command or "goodbye" in command:
         speak("Goodbye!")
         break
     execute_command(command)
